@@ -2,10 +2,10 @@ describe('spec', () => {
   it('should compare two phones', () => {
     cy.visit('https://demo.nopcommerce.com/');
 
-    cy.get('.notmobile a[href="/electronics"]').click();
-    cy.get(' .sub-category-item .title a[href="/cell-phones"]').first().click();
+    cy.get('.notmobile').contains("Electronics").click();
+    cy.get('.sub-category-item').contains("Cell phones").click();
 
-    cy.get('.buttons button[title="Add to compare list"]').as("compareButtons");
+    cy.get('.buttons').find(".add-to-compare-list-button").as("compareButtons");
 
     let comparedPhones= [];
 
@@ -23,7 +23,7 @@ describe('spec', () => {
     cy.get("@compareButtons").eq(1).click();
     cy.wait(1000);
 
-    cy.get('a[href="/compareproducts"]').last().click();
+    cy.get('.customer-service').contains("Compare").click();
 
     cy.url().should('include', '/compare');
 
