@@ -1,6 +1,10 @@
 describe('spec', () => {
+  beforeEach(()=> {
+    cy.visit(Cypress.env("BASE_URL"));
+  });
+
+
   it('should compare two phones', () => {
-    cy.visit('https://demo.nopcommerce.com/');
 
     cy.get('.notmobile').contains("Electronics").click({force: true});
     cy.get('.sub-category-item').contains("Cell phones").click({force: true});
@@ -18,10 +22,11 @@ describe('spec', () => {
     });
 
     cy.get("@compareButtons").first().click({force: true});
-    cy.wait(1000);
+    cy.get(".bar-notification-container span.close").should("be.visible").click();
     
+    cy.get(".bar-notification-container span.close").should("not.exist")
     cy.get("@compareButtons").eq(1).click({force: true});
-    cy.wait(1000);
+    cy.get(".bar-notification-container span.close").should("be.visible").click();
 
     cy.get('.customer-service').contains("Compare").click();
 

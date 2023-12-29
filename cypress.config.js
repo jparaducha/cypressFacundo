@@ -9,4 +9,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
   },
+  env: {
+    BASE_URL: 'https://demo.nopcommerce.com/'
+  }
 });
